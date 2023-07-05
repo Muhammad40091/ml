@@ -9,7 +9,14 @@ import random
 
 st.title("Sarcasm Text Detection")
 
-color_palette = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+color_palette = {
+    'red': '#FF0000',
+    'orange': '#FFA500',
+    'yellow': '#FFFF00',
+    'green': '#008000',
+    'blue': '#0000FF',
+    'purple': '#800080'
+}
 
 selected_color = 'red'
 
@@ -64,11 +71,21 @@ def handle_input_text():
         col3.write("")
 
 
-# Create a selectbox for color palette
-selected_color = st.selectbox("Select Color:", color_palette, index=color_palette.index(selected_color))
+# Create a sidebar for color palette selection
+with st.sidebar:
+    st.title("Color Palette")
+    for color_name, color_code in color_palette.items():
+        if st.button(color_name, key=color_name, help=color_name, on_click=lambda c=color_name: set_color(c)):
+            selected_color = color_name
+
+
+def set_color(color):
+    global selected_color
+    selected_color = color
+
 
 # Set the color of col3 based on the selected color
-col3 = st.color_picker("Result Color", selected_color)
+col3 = st.color_picker("Result Color", color_palette[selected_color])
 
 # Apply the selected color to the button
 col2.button("Detect🔍", on_click=handle_input_text)
