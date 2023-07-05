@@ -52,12 +52,11 @@ def handle_input_text():
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
         preds = f"{int(np.round(probs))}"
+        col3.empty()
         if preds == '1':
             col3.write("Sarcastic")
         else:
             col3.write("Not Sarcastic")
-    else:
-        col3.empty()
 
 
 color_palette = {
@@ -74,6 +73,6 @@ selected_color = 'red'
 selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
 
 # Set the color of col3 based on the selected color
-col3 = st.color_picker("Result Color", color_palette[selected_color])
+st.color_picker("Result Color", color_palette[selected_color])
 
 col2.button("Detect🔍", on_click=handle_input_text)
