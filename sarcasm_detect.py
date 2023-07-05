@@ -57,15 +57,15 @@ def handle_input_text():
 
 
 color_palette = {
-    'red': '#FF0000',
-    'orange': '#FFA500',
-    'yellow': '#FFFF00',
-    'green': '#008000',
-    'blue': '#0000FF',
-    'purple': '#800080'
+    'Frustrated': '#FF0000',
+    'Angry': '#FFA500',
+    'Sad': '#FFFF00',
+    'Content': '#008000',
+    'Happy': '#0000FF',
+    'Excited': '#800080'
 }
 
-selected_color = 'red'
+selected_color = 'Frustrated'
 
 selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
 
