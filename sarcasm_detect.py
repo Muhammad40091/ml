@@ -16,7 +16,7 @@ padding_type = 'post'
 oov_tok = "<OOV>"
 epochs = 5
 
-# Read csv file for using pandas libary
+# Read csv file for using pandas library
 sarcasm_df = pd.read_csv("Data.csv")
 
 # Split them into two columns
@@ -54,8 +54,6 @@ def handle_input_text():
         probs = model.predict(input_padded_sentences)
         pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
         col3.write(pred_label)
-    else:
-        col3.write("")
 
 
 color_palette = {
