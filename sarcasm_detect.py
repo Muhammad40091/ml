@@ -68,7 +68,7 @@ def handle_input_text():
         else:
             col3.write("Not Sarcastic")
     else:
-        col3.write("")
+        col3.empty()
 
 
 # Create a selectbox for color palette
