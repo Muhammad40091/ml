@@ -16,7 +16,7 @@ padding_type = 'post'
 oov_tok = "<OOV>"
 epochs = 5
 
-# Read csv file for using pandas library
+# Read csv file using pandas library
 sarcasm_df = pd.read_csv("Data.csv")
 
 # Split them into two columns
@@ -43,19 +43,6 @@ sarcastic_sentences = [
 
 text = st.text_input("Enter Text:", placeholder=random.choice(sarcastic_sentences))
 
-col2, col3 = st.columns(2)
-
-
-def handle_input_text():
-    if len(text) != 0:
-        input_sentences = tokenizer.texts_to_sequences([text])
-        input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
-                                               truncating=trunc_type)
-        probs = model.predict(input_padded_sentences)
-        pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
-        col3.write(pred_label)
-
-
 color_palette = {
     'Frustrated': '#FF0000',
     'Angry': '#FFA500',
@@ -72,4 +59,16 @@ selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
 # Set the color of col3 based on the selected color
 col3 = st.color_picker("Result Color", color_palette[selected_color])
 
+col2, _ = st.columns([9, 1])
 col2.button("Detect🔍", on_click=handle_input_text)
+
+
+def handle_input_text():
+    if len(text) != 0:
+        input_sentences = tokenizer.texts_to_sequences([text])
+        input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
+                                               truncating=trunc_type)
+        probs = model.predict(input_padded_sentences)
+        pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
+        st.write(f"Text: {text}")
+        st.write(f"Prediction: {pred_label}")
