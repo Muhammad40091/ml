@@ -63,5 +63,21 @@ def handle_input_text():
     else:
         col3.write("")
 
+color_palette = {
+    'red': '#FF0000',
+    'orange': '#FFA500',
+    'yellow': '#FFFF00',
+    'green': '#008000',
+    'blue': '#0000FF',
+    'purple': '#800080'
+}
+
+selected_color = 'red'
+
+selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
+
+# Set the color of col3 based on the selected color
+col3 = st.color_picker("Result Color", color_palette[selected_color])
+
 
 col2.button("Detect🔍", on_click=handle_input_text)
