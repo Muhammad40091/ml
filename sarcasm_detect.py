@@ -53,10 +53,9 @@ def handle_input_text():
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
         pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
-        col3.empty()
         col3.write(pred_label)
     else:
-        col3.empty()
+        col3.write("")
 
 
 color_palette = {
