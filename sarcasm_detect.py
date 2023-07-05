@@ -59,10 +59,6 @@ selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
 # Set the color of col3 based on the selected color
 col3 = st.color_picker("Result Color", color_palette[selected_color])
 
-col2, _ = st.columns([9, 1])
-col2.button("Detect🔍", on_click=handle_input_text)
-
-
 def handle_input_text():
     if len(text) != 0:
         input_sentences = tokenizer.texts_to_sequences([text])
@@ -72,3 +68,6 @@ def handle_input_text():
         pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
         st.write(f"Text: {text}")
         st.write(f"Prediction: {pred_label}")
+
+col2, _ = st.columns([9, 1])
+col2.button("Detect🔍", on_click=handle_input_text)
