@@ -33,7 +33,7 @@ sarcasm_df = pd.read_csv("Data.csv")
 input_seq = sarcasm_df['headlines']
 target_seq = sarcasm_df['target']
 
-tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok, )
+tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
 tokenizer.fit_on_texts(input_seq)
 word_index = tokenizer.word_index
 model = tf.keras.models.load_model('sarcasm_detect.h5')
@@ -51,7 +51,7 @@ sarcastic_sentences = [
     "You know what's better than efficient code? Slow code."
 ]
 
-text = st.text_input("Enter Text: ", placeholder=random.choice(sarcastic_sentences))
+text = st.text_input("Enter Text:", placeholder=random.choice(sarcastic_sentences))
 
 col2, col3 = st.columns(2)
 
@@ -71,8 +71,11 @@ def handle_input_text():
         col3.write("")
 
 
+# Create a selectbox for color palette
+selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
+
 # Set the color of col3 based on the selected color
-col3 = st.color_picker("Chose Color", color_palette[selected_color])
+col3 = st.color_picker("Result Color", color_palette[selected_color])
 
 # Apply the selected color to the button
 col2.button("Detect🔍", on_click=handle_input_text)
