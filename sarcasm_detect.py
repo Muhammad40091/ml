@@ -71,21 +71,8 @@ def handle_input_text():
         col3.write("")
 
 
-# Create a sidebar for color palette selection
-with st.sidebar:
-    st.title("Color Palette")
-    for color_name, color_code in color_palette.items():
-        if st.button(color_name, key=color_name, help=color_name, on_click=lambda c=color_name: set_color(c)):
-            selected_color = color_name
-
-
-def set_color(color):
-    global selected_color
-    selected_color = color
-
-
 # Set the color of col3 based on the selected color
-col3 = st.color_picker("Result Color", color_palette[selected_color])
+col3 = st.color_picker("Chose Color", color_palette[selected_color])
 
 # Apply the selected color to the button
 col2.button("Detect🔍", on_click=handle_input_text)
