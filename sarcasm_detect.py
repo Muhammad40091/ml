@@ -30,7 +30,20 @@ tokenizer.fit_on_texts(input_seq)
 word_index = tokenizer.word_index
 model = tf.keras.models.load_model('sarcasm_detect.h5')
 
-text = st.text_input("Enter Text: ", placeholder='Write a text for detect sarcasm or not sarcasm')
+sarcastic_sentences = [
+    "Wow, I love waking up early on weekends!",
+    "You're doing a great job breaking things.",
+    "Oh, because making things complicated is always the best approach.",
+    "Sure, let's prioritize adding more bugs to the codebase.",
+    "Oh, I absolutely love it when my computer crashes.",
+    "Yes, please make the font size smaller. That's what I need.",
+    "I'm thrilled to have another meeting scheduled for this afternoon.",
+    "Oh, fantastic! The internet is down again.",
+    "Brilliant idea! Let's reinvent the wheel.",
+    "You know what's better than efficient code? Slow code."
+]
+
+text = st.text_input("Enter Text:", placeholder=random.choice(sarcastic_sentences))
 
 col2, col3 = st.columns(2)
 
