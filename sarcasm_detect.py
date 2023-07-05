@@ -1,4 +1,3 @@
-# Import some of the most important libary for using this notebook
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -8,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import streamlit as st
 import random
 
-st.title("Sarcasm Text Detection ")
+st.title("Sarcasm Text Detection")
 
 vocab_size = 10000
 embedding_dim = 16
@@ -19,10 +18,7 @@ oov_tok = "<OOV>"
 training_size = 20000
 epochs = 5
 
-# Read csv file for using pandas libary
 sarcasm_df = pd.read_csv("Data.csv")
-
-# Split them two column
 input_seq = sarcasm_df['headlines']
 target_seq = sarcasm_df['target']
 
@@ -61,7 +57,8 @@ def handle_input_text():
         else:
             col3.write("Not Sarcastic")
     else:
-        col3.write("")
+        col3.empty()
+
 
 color_palette = {
     'red': '#FF0000',
@@ -78,6 +75,5 @@ selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
 
 # Set the color of col3 based on the selected color
 col3 = st.color_picker("Result Color", color_palette[selected_color])
-
 
 col2.button("Detect🔍", on_click=handle_input_text)
