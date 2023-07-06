@@ -54,7 +54,7 @@ color_palette = {
 
 selected_color = 'Frustrated'
 
-selected_color = st.selectbox("Select Color:", list(color_palette.keys()))
+selected_color = st.selectbox("How are you feeling?", list(color_palette.keys()))
 
 # Set the color of col3 based on the selected color
 col3 = st.color_picker("Result Color", color_palette[selected_color])
