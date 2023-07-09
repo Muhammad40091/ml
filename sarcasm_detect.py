@@ -71,3 +71,9 @@ def handle_input_text():
 
 col2, _ = st.columns([9, 1])
 col2.button("Detect🔍", on_click=handle_input_text)
+
+# Place a horizontal line to separate the result from the button
+st.markdown("---")
+
+# Display the result below the button
+handle_input_text()
