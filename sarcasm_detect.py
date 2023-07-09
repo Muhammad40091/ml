@@ -66,14 +66,8 @@ def handle_input_text():
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
         pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
-        return pred_label
-    return ""
+        st.text(f"Text: {text}")
+        st.markdown(f"Prediction: **{pred_label}**")
 
 col2, _ = st.columns([9, 1])
-if col2.button("Detect🔍"):
-    result = handle_input_text()
-    st.write("Text: ", text)
-    st.write("Prediction: ", result)
-
-# Place a horizontal line to separate the result from the button
-st.markdown("---")
+col2.button("Detect🔍", on_click=handle_input_text)
