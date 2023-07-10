@@ -65,9 +65,13 @@ def handle_input_text():
         input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
-        pred_label = "Sarcastic" if probs[0][0] >= 0.5 else "Not Sarcastic"
-        return pred_label
-    return ""
+        preds = f"{int(np.round(probs))}"
+        if preds == '1':
+            col3.write("Sarcastic")
+        else:
+            col3.write("Not Sarcastic")
+    else:
+        col3.write("")
 
 col2, _ = st.columns([9, 1])
 if col2.button("Detect🔍"):
