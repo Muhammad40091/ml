@@ -56,20 +56,27 @@ selected_color = 'Frustrated'
 
 selected_color = st.selectbox("How are you feeling?", list(color_palette.keys()))
 
+# Set the color of col3 based on the selected color
+col3 = st.empty()
+
 def handle_input_text():
     if len(text) != 0:
         input_sentences = tokenizer.texts_to_sequences([text])
         input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
-        preds = np.round(probs).astype(int)
-        result = "Sarcastic" if preds == 1 else "Not Sarcastic"
-        st.write("Text: ", text)
-        st.write("Prediction: ", result)
-        st.write("Result Color: ", st.color_picker("Result Color", color_palette[selected_color]))
+        preds = f"{int(np.round(probs))}"
+        if preds == '1':
+            col3.write("Sarcastic")
+        else:
+            col3.write("Not Sarcastic")
     else:
-        st.write("Text: ", text)
-        st.write("Prediction: ")
+        col3.write("")
 
 if st.button("Detect🔍"):
-    handle_input_text()
+    result = handle_input_text()
+    st.write("Text: ", text)
+    st.write("Prediction: ", result)
+
+# Place a horizontal line to separate the result from the button
+st.markdown("---")
