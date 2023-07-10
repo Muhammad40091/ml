@@ -77,5 +77,4 @@ if st.button("Detect🔍"):
     result = handle_input_text()
     st.write("Text: ", text)
     st.write("Prediction: ", result)
-    col3 = st.color_picker("Result Color", color_palette[selected_color])
     col3.write(result)
