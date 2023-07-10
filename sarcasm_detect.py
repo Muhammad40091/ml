@@ -65,19 +65,16 @@ def handle_input_text():
         input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
-        preds = f"{int(np.round(probs))}"
-        if preds == '1':
-            col3.write("Sarcastic")
+        preds = np.round(probs).astype(int)
+        if preds == 1:
+            return "Sarcastic"
         else:
-            col3.write("Not Sarcastic")
+            return "Not Sarcastic"
     else:
-        col3.write("")
+        return ""
 
-col2, _ = st.columns([9, 1])
-if col2.button("Detect🔍"):
+if st.button("Detect🔍"):
     result = handle_input_text()
     st.write("Text: ", text)
     st.write("Prediction: ", result)
-
-# Place a horizontal line to separate the result from the button
-st.markdown("---")
+    col3.write(result)
