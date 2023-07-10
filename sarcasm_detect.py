@@ -52,10 +52,9 @@ color_palette = {
     'Excited': '#800080'
 }
 
-selected_color = st.selectbox("How are you feeling?", list(color_palette.keys()))
+selected_color = 'Frustrated'
 
-# Set the color of col3 based on the selected color
-col3 = st.empty()
+selected_color = st.selectbox("How are you feeling?", list(color_palette.keys()))
 
 def handle_input_text():
     if len(text) != 0:
@@ -63,19 +62,15 @@ def handle_input_text():
         input_padded_sentences = pad_sequences(input_sentences, maxlen=max_length, padding=padding_type,
                                                truncating=trunc_type)
         probs = model.predict(input_padded_sentences)
-        preds = f"{int(np.round(probs))}"
-        if preds == '1':
-            col3.write("Sarcastic")
-        else:
-            col3.write("Not Sarcastic")
+        preds = np.round(probs).astype(int)
+        result = "Sarcastic" if preds == 1 else "Not Sarcastic"
+        col3 = st.color_picker("Result Color", color_palette[selected_color])
+        st.write("Text: ", text)
+        st.write("Prediction: ", result)
+        col3.write(result)
     else:
-        col3.write("")
+        st.write("Text: ", text)
+        st.write("Prediction: ")
 
-color_picker_result = col3.color_picker("Result Color", color_palette[selected_color])
 if st.button("Detect🔍"):
-    result = handle_input_text()
-    st.write("Text: ", text)
-    st.write("Prediction: ", result)
-
-# Place a horizontal line to separate the result from the button
-st.markdown("---")
+    handle_input_text()
