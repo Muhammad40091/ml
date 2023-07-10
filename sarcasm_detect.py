@@ -52,8 +52,6 @@ color_palette = {
     'Excited': '#800080'
 }
 
-selected_color = 'Frustrated'
-
 selected_color = st.selectbox("How are you feeling?", list(color_palette.keys()))
 
 # Set the color of col3 based on the selected color
@@ -73,6 +71,7 @@ def handle_input_text():
     else:
         col3.write("")
 
+color_picker_result = col3.color_picker("Result Color", color_palette[selected_color])
 if st.button("Detect🔍"):
     result = handle_input_text()
     st.write("Text: ", text)
